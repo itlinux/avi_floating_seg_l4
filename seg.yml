@@ -14,7 +14,7 @@
     avi_credentials:
       username: "admin"
       password: "HelloRemodemopasswordforavi"
-      controller: "10.10.110.111"
+      controller: "10.10.10.111"
       api_version: "22.1.4"
   tasks:
     - name: Example to create Serviceenginegroup object
