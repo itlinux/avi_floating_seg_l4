@@ -1,5 +1,10 @@
 = Major info Preserve Client IP with vSphere
 
+To make it easier I created 3 ansible playbook. I could have had this into one but I wanted to keep it separted. It contains the minimal needed for the setup. 
+The floating IP playbook can easily add more IPs if needed, if you are running an SE into diff port group.
+
+== Avi Default info from KB
+
 By default, Avi Service Engines (SEs) do source NAT-ing (SNAT) of traffic destined to back-end servers. Due to SNAT, the application servers see the IP address of the SE interfaces and are unaware of the original client’s IP address. Preserving a client’s IP address is a desirable feature in many cases, for example, when servers have to apply security and access-control policies. Two ways to solve this problem in Avi Vantage are:
 
 X-Forwarded-For — limited to HTTP(S) application profiles only
@@ -11,6 +16,6 @@ A third and more generic approach is for the Service Engine to use the client IP
 Until Avi Vantage release 18.2.6, selecting Enable IP Routing with Service Engine option is a prerequisite for selecting the Preserve Client IP Address option in any application profile.
 
 However, starting with Avi Vantage version 18.2.6, enabling IP Routing is not mandatory to select Preserve Client IP Address.
-
+<snip>
 
 IMPORTANT: More info at link:https://avinetworks.com/docs/22.1/preserve-client-ip/[Avi KB]
