@@ -1,0 +1,30 @@
+---
+# Edit the vars to create a new Service Engine Group
+# Cretaed by Remo Mattei matteir@vmwrae.com
+- hosts: localhost
+  connection: local
+  collections:
+    - vmware.alb
+  vars:
+    cloud_name: "vcenter"
+    se_folder: "remo/AviSE"
+    se_prefix_name: "AS_22_1_4"
+    segname: "active_standby"
+    delete_after: "2" # this is in min
+    avi_credentials:
+      username: "admin"
+      password: "HelloRemodemopasswordforavi"
+      controller: "10.10.110.111"
+      api_version: "22.1.4"
+  tasks:
+    - name: Example to create Serviceenginegroup object
+      avi_serviceenginegroup:
+        avi_credentials: "{{ avi_credentials }}"
+        state: present
+        name:  "{{ segname }}"
+        active_standby: true
+        cloud_ref: "/api/cloud/?name={{ cloud_name }}"
+        ha_mode: HA_MODE_LEGACY_ACTIVE_STANDBY
+        vcenter_folder: "{{ se_folder }}"
+        se_name_prefix:  "{{ se_prefix_name }}"
+        se_deprovision_delay: "{{ delete_after }}"

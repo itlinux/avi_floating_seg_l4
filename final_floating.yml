@@ -1,0 +1,38 @@
+# Edit the vars to create a new networkservice
+# Cretaed by Remo Mattei matteir@vmwrae.com
+- connection: local
+  hosts: localhost
+  collections:
+  - vmware.alb
+  vars:
+   username: "admin"
+   password: "HelloRemodemopasswordforavi"
+   avi_version: "22.1.4"
+   controller: "10.10.10.111"
+   api_version: "22.1.4"
+   segname: "as_legacy"
+   vcenter: "vcenter"
+   ip1:  "172.16.0.120"
+   networkservice_name: "remo_demo"
+  tasks:
+  - name: 'Create or Update NetworkService: nosnat'
+    avi_networkservice:
+      name: "{{ networkservice_name }}"
+      tenant_ref: "/api/tenant/?name={{ username }}"
+      cloud_ref: "/api/cloud?name={{ vcenter }}"
+      service_type: ROUTING_SERVICE
+      routing_service:
+        enable_routing: true
+        floating_intf_ip:
+        - addr: "{{ ip1 }}"
+          type: V4
+        enable_auto_gateway: true
+      se_group_ref: "/api/serviceenginegroup/?name={{ segname }}"
+      vrf_ref: /api/vrfcontext/?name=global
+      password: "{{ password }}"
+      controller: "{{ controller }}"
+      username: "{{ username }}"
+      api_version: "{{ api_version }}"
+      state: present
+      api_context: '{{avi_api_context | default(omit)}}'
+      tenant: "{{ username }}"
