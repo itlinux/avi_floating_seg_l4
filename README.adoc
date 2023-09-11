@@ -19,3 +19,36 @@ However, starting with Avi Vantage version 18.2.6, enabling IP Routing is not ma
 <snip>
 
 IMPORTANT: More info at link:https://avinetworks.com/docs/22.1/preserve-client-ip/[Avi KB]
+
+
+== Install and configure Avi Tools
+
+=== Run Avitools
+We do have already some info on what we will do when we have out avitools up and running on the main repo Page.
+
+.Start avitools
+----
+curl -O https://raw.githubusercontent.com/avinetworks/avitools/master/run.sh
+----
+
+We will create the docker folder. From a Linux Box /opt/docker will be mapped to /opt/avi therefore when you docker exec it takes you right inside the folder.
+
+.Avitools run script
+----
+mkdir /opt/edd
+mv run.sh /opt/
+chmod +x run.sh
+./run.sh -v 22.1.3 -c bash -d /opt/edd -b
+docker exec -it avitools bash
+----
+
+Once you go into the container, you will see the content of the /opt/avi which is what belongs into the mydocker folder. +
+Let's run the update to get the latest ansible and terraform.
+
+.Ansible
+----
+pip3 uninstall ansible
+pip3 install --force-reinstall ansible ansible-core
+/usr/bin/python3.8 -m pip install --upgrade pip
+pip list
+----
