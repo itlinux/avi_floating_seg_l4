@@ -1,21 +1,20 @@
 ---
 # Edit the vars to create a new application profile
+# This needs to run after you created the SE Group
 # Cretaed by Remo Mattei matteir@vmwrae.com
 - connection: local
   hosts: localhost
   collections:
   - vmware.alb
+  vars_files:
+    - creds.yml
   vars:
-   username: "admin"
-   password: "HelloRemodemopasswordforavi"
-   avi_version: "22.1.4"
-   controller: "10.10.10.111"
-   api_version: "22.1.4"
    segname: "as_legacy"
    vcenter: "vcenter"
   tasks:
   - name: 'Create or Update ApplicationProfile: l4-preserve-client-ip'
     avi_applicationprofile:
+      avi_credentials: "{{ avi_credentials }}"
       name: l4-preserve-client-ip
       type: APPLICATION_PROFILE_TYPE_L4
       tenant_ref: /api/tenant/?name=admin
@@ -24,10 +23,6 @@
           thresh_period: 5
       tcp_app_profile: {}
       preserve_client_ip: true
-      controller: '{{ controller }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
       state: '{{ state | default(omit)}}'
-      api_version: "{{ api_version }}"
       api_context: '{{avi_api_context | default(omit)}}'
       tenant: "{{ username }}"

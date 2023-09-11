@@ -4,18 +4,15 @@
   hosts: localhost
   collections:
   - vmware.alb
+  vars_files:
+     - creds.yml
   vars:
-   username: "admin"
-   password: "HelloRemodemopasswordforavi"
-   avi_version: "22.1.4"
-   controller: "10.10.10.111"
-   api_version: "22.1.4"
-   segname: "as_legacy"
+   segname: "active_standby"
    vcenter: "vcenter"
-   ip1:  "172.16.0.120"
+   ip1:  "100.64.130.103"
    networkservice_name: "remo_demo"
   tasks:
-  - name: 'Create or Update NetworkService: nosnat'
+  - name: 'Create or Update NetworkService: floating_ip'
     avi_networkservice:
       name: "{{ networkservice_name }}"
       tenant_ref: "/api/tenant/?name={{ username }}"
@@ -29,10 +26,7 @@
         enable_auto_gateway: true
       se_group_ref: "/api/serviceenginegroup/?name={{ segname }}"
       vrf_ref: /api/vrfcontext/?name=global
-      password: "{{ password }}"
-      controller: "{{ controller }}"
-      username: "{{ username }}"
-      api_version: "{{ api_version }}"
+      avi_credentials: "{{ avi_credentials }}"
       state: present
       api_context: '{{avi_api_context | default(omit)}}'
       tenant: "{{ username }}"

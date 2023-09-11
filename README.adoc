@@ -1,6 +1,6 @@
 = Major info Preserve Client IP with vSphere
 
-To make it easier I created 3 ansible playbook. I could have had this into one but I wanted to keep it separted. It contains the minimal needed for the setup. 
+To make it easier I created 3 ansible playbook. I could have had this into one but I wanted to keep it separted. It contains the minimal needed for the setup.
 The floating IP playbook can easily add more IPs if needed, if you are running an SE into diff port group.
 
 == Avi Default info from KB
@@ -51,4 +51,21 @@ pip3 uninstall ansible
 pip3 install --force-reinstall ansible ansible-core
 /usr/bin/python3.8 -m pip install --upgrade pip
 pip list
+----
+
+== Run the playbook
+once you are in the avi tools container git clone the repo
+
+----
+git clone https://github.com/itlinux/avi_floating_seg_l4
+----
+
+Then edit each of the yaml file to setup the IP to be used for your desire floating option.
+Then edit the creds.yml to ender the username and password
+
+.Run the ansible
+----
+ansible-playbook seg.yml
+ansible-playbook  preserve_client_ip_l4_profile.yml
+ansible-playbook  floating_ip.yml
 ----
