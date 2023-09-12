@@ -11,6 +11,7 @@
   vars:
    segname: "as_legacy"
    vcenter: "vcenter"
+   username: "admin"
   tasks:
   - name: 'Create or Update ApplicationProfile: l4-preserve-client-ip'
     avi_applicationprofile:
