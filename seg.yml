@@ -7,7 +7,7 @@
     - vmware.alb
   vars_files:
     - creds.yml
-    - pass.yml
+    - pass
   vars:
     cloud_name: "dc1_vCenter"
     se_folder: "remo/AviSE"

@@ -6,7 +6,7 @@
   - vmware.alb
   vars_files:
      - creds.yml
-     - pass.yml
+     - pass
   vars:
    segname: "active_standby"
    vcenter: "dc1_vCenter"
