@@ -72,7 +72,8 @@ ansible-vault create pass
 The command above will prompt you for a password, do not put the same password of your controller. This password is only used to decrypt the vault. 
 
 
-Add the variable needed (pass)
+Add the variable needed (pass) which is in the creds.yml location. So this will make it a little more secure. 
+
 .password variable
 ----
 pass: "62KxfU__xydnxylfdajfdsnayxlandljfdo"
