@@ -61,11 +61,27 @@ git clone https://github.com/itlinux/avi_floating_seg_l4
 ----
 
 Then edit each of the yaml file to setup the IP to be used for your desire floating option.
-Then edit the creds.yml to ender the username and password
+Then edit the creds.yml to ender the username and pass file. 
+
+NOTE: The password file is encrypted therefore we need to create a new one. 
+
+.Create vault file
+----
+ansible-vault create pass
+----
+The command above will prompt you for a password, do not put the same password of your controller. This password is only used to decrypt the vault. 
+
+
+Add the variable needed (pass)
+.password variable
+----
+pass: "62KxfU__xydnxylfdajfdsnayxlandljfdo"
+----
+
 
 .Run the ansible
 ----
-ansible-playbook seg.yml
-ansible-playbook  preserve_client_ip_l4_profile.yml
-ansible-playbook  floating_ip.yml
+ansible-playbook seg.yml  --ask-vault-pass
+ansible-playbook  preserve_client_ip_l4_profile.yml --ask-vault-pass
+ansible-playbook  floating_ip.yml ---ask-vault-pass
 ----
