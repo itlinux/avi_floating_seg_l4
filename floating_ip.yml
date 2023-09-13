@@ -6,11 +6,13 @@
   - vmware.alb
   vars_files:
      - creds.yml
+     - pass.yml
   vars:
    segname: "active_standby"
-   vcenter: "vcenter"
+   vcenter: "dc1_vCenter"
    ip1:  "100.64.130.103"
    networkservice_name: "remo_demo"
+   username: "admin"
   tasks:
   - name: 'Create or Update NetworkService: floating_ip'
     avi_networkservice:

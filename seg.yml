@@ -7,8 +7,9 @@
     - vmware.alb
   vars_files:
     - creds.yml
+    - pass.yml
   vars:
-    cloud_name: "vcenter"
+    cloud_name: "dc1_vCenter"
     se_folder: "remo/AviSE"
     se_prefix_name: "AS_22_1_4"
     segname: "active_standby"

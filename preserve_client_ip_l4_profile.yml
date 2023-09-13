@@ -8,9 +8,10 @@
   - vmware.alb
   vars_files:
     - creds.yml
+    - pass.yml
   vars:
-   segname: "as_legacy"
-   vcenter: "vcenter"
+   segname: "active_legacy"
+   vcenter: "dc1_vCenter"
    username: "admin"
   tasks:
   - name: 'Create or Update ApplicationProfile: l4-preserve-client-ip'
